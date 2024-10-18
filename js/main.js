@@ -10,6 +10,9 @@ function cout(info, value) {
 document.getElementById('show__browser-name')?.addEventListener('click', () => {
     getBrowserName();
     getOsName();
+    getGeolocation();
+    getCoordinates();
+    getPrivacyControl();
 });
 const BROWSERMAPPING = [
     { name: 'yandex', browser: 'YaBrowser' },
@@ -40,8 +43,29 @@ pasteButton.addEventListener('click', async () => {
         output.textContent = 'Не получилось прочитатть буфер';
     }
 });
-const DEVICEMEMORY = navigator.deviceMemory;
-console.log(DEVICEMEMORY);
+function getCoordinates() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            const timestamp = position.timestamp;
+            const date = new Date(timestamp);
+            console.log(`Широта: ${latitude}`);
+            console.log(`Долгота: ${longitude}`);
+            show('width', latitude);
+            show('height', longitude);
+        }, (error) => {
+            console.error('Не смог достать местоположения:', error);
+        });
+    }
+    else {
+        console.error('Геолокация не поддерживается твоим браузером.');
+    }
+}
+function getGeolocation() {
+    const DATES = new Date;
+    show('geolocation', DATES);
+}
 function getNetworkInfo() {
     const CONNECT = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
     cout('скорость Mbps', CONNECT.downlink);
@@ -73,5 +97,20 @@ function getPlugins() {
     for (let i = 0; i < PLUGINS.length; i++) {
         pluginsList.push(PLUGINS[i].name);
     }
+    if (pluginsList.length === 0) {
+        show('plugins', 'если нету списка расширений, значит такую функцию выпили в новых браузерах');
+    }
+    else {
+        show('plugins', pluginsList.join(', '));
+    }
     console.log(pluginsList);
+}
+function getPrivacyControl() {
+    const PRIVACY = navigator.globalPrivacyControl;
+    if (PRIVACY) {
+        show('privacy', PRIVACY);
+    }
+    else {
+        show('privacy', 'хз(пусто потому что ты отклчил, браузер не поддерживает или еще что мб...)');
+    }
 }

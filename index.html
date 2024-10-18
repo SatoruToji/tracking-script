@@ -19,7 +19,33 @@
   <button id="pasteButton">твой буфер обмена:</button>
   <p id="output"></p>
 
+  <div class="card">
+    <p class="card__description">твоя geolocation если верить браузеру:</p>
+    <p id="geolocation"></p>
+  </div>
+
+  <div class="card">
+    <p class="card__description">тоже самое что и сверху, но ты даешь разрешение на геолокацию.</p>
+    <p class="card__description">твоя широта:</p>
+    <p id="width"></p>
+    <p class="card__description">твоя долгота:</p>
+    <p id="height"></p>
+  </div>
+
+  <div class="card">
+    <p class="card__description">Давал ли ты разрешение сайтам собирать и продавать твои данные компаниям?:</p>
+    <p id="privacy"></p>
+  </div>
+
+  <div class="card">
+    <p class="card__description">твои плагины:</p>
+    <p id="plugins">просмотр плагинов в новых браузерах выпилили</p>
+  </div>
+
+
   <button id="show__browser-name">показать</button>
+    <h4>еще можно запросить и получить доступ к микрофону, камере, и с помощью бекенда получить ip адресс (а по нему найти приблизительно тебя), но, мне лень</h4>
+
   <script src="js/main.js"></script>
 </body>
 </html>

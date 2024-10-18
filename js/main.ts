@@ -11,4 +11,7 @@ function cout(info:string, value:string): void{
 document.getElementById('show__browser-name')?.addEventListener('click', ()=>{
     getBrowserName()
     getOsName()
+    getGeolocation()
+    getCoordinates()
+    getPrivacyControl()
 })
